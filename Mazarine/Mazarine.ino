@@ -35,7 +35,7 @@ void setup() {
   Serial.println(F("DFRobot DFPlayer Mini Demo"));
   Serial.println(F("Initializing DFPlayer ... (May take 3~5 seconds)"));
 
-  if (!myDFPlayer.begin(mySoftwareSerial)) {  //Use softwareSerial to communicate with mp3.
+  if (myDFPlayer.begin(mySoftwareSerial)) {  //Use softwareSerial to communicate with mp3.
     Serial.println(F("Unable to begin:"));
     Serial.println(F("1.Please recheck the connection!"));
     Serial.println(F("2.Please insert the SD card!"));
@@ -51,15 +51,12 @@ void setup() {
 }
 
 void loop() {
-
-
+  
   pinValues5 = readCapacitivePin(5);
   pinValues6 = readCapacitivePin(6);
   pinValues7 = readCapacitivePin(7);
   pinValues8 = readCapacitivePin(8);
  
-
-
    if (pinValues5 >= seuil5 && pinValues6 < seuil6 && pinValues7 < seuil7 && pinValues8 < seuil8) {
 
 myDFPlayer.start();  
@@ -77,7 +74,7 @@ myDFPlayer.pause();
 myDFPlayer.next();  
   delay(10);
     
-  }
+  } 
 
    if (pinValues5 < seuil5 && pinValues6 < seuil6 && pinValues7 < seuil7 && pinValues8 >= seuil8) { 
 myDFPlayer.previous(); 
